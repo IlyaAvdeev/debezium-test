@@ -1,8 +1,8 @@
-FROM debezium/connect:1.7.1.Final
+FROM debezium/connect:2.7.2.Final
 ENV KAFKA_CONNECT_JDBC_DIR=$KAFKA_CONNECT_PLUGINS_DIR/kafka-connect-jdbc
 
-ARG POSTGRES_VERSION=42.2.8
-ARG KAFKA_JDBC_VERSION=5.3.1
+ARG POSTGRES_VERSION=42.7.5
+ARG KAFKA_JDBC_VERSION=10.8.2
 
 # Deploy PostgreSQL JDBC Driver
 RUN cd /kafka/libs && curl -sO https://jdbc.postgresql.org/download/postgresql-$POSTGRES_VERSION.jar

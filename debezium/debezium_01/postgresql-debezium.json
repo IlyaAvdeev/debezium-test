@@ -2,6 +2,7 @@
     "name": "pg-get-data-connector",
     "config":{
         "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+        "topic.prefix":"db_pg_oltp",
         "tasks.max": "1",
         "database.hostname": "pg_oltp",
         "database.port": 5432,

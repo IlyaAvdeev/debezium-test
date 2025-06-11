@@ -1,24 +1,13 @@
 version: '3'
 services:
-  kafdrop:
-    image: obsidiandynamics/kafdrop
-    container_name: biwed_stat_kafka
-    restart: "no"
-    ports:
-      - "9090:9000"
-    environment:
-      KAFKA_BROKERCONNECT: "kafka:29092"
-      JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
-    depends_on:
-      - "kafka"
   zookeeper:
-    image: debezium/zookeeper:1.7
+    image: debezium/zookeeper:2.7.3.Final
     ports:
      - 2181:2181
      - 2888:2888
      - 3888:3888
   kafka:
-    image: debezium/kafka:1.7
+    image: debezium/kafka:2.7.3.Final
     ports:
      - 9092:9092
     links:
@@ -34,7 +23,7 @@ services:
       KAFKA_RESTART_DELAY: "5"
       ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: "0"
   postgres:
-    image: debezium/postgres:9.6
+    image: debezium/postgres:16-alpine
     ports:
      - "5432:5432"
     environment:
@@ -42,7 +31,7 @@ services:
      - POSTGRES_PASSWORD=postgrespw
      - POSTGRES_DB=db_pg_oltp
   connect:
-    image: debezium/connect:1.7.1.Final
+    image: debezium/connect:2.7.3.Final
     build:
       context: debezium-jdbc
     ports:
@@ -57,7 +46,7 @@ services:
      - OFFSET_STORAGE_TOPIC=my_connect_offsets
      - STATUS_STORAGE_TOPIC=my_source_connect_statuses
   pg_oltp: 
-    image: postgres:14
+    image: postgres:17-alpine
     ports:
      - "5434:5432"
     environment:

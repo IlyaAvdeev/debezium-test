@@ -53,6 +53,9 @@ services:
      - POSTGRES_USER=postgresuser
      - POSTGRES_PASSWORD=postgrespw
      - POSTGRES_DB=oltp
+    volumes:
+       #- ./backend/DB/db:/var/lib/postgresql/data
+       - ./db_init:/docker-entrypoint-initdb.d
     command:
       - "postgres"
       - "-c"
